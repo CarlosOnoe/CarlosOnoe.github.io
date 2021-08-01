@@ -4,17 +4,17 @@
   
     
     <entry>
-      <title>Springboot学习</title>
-      <link href="/2021/07/04/Springboot%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/"/>
-      <url>/2021/07/04/Springboot%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/</url>
+      <title>SpringBoot常用注解</title>
+      <link href="/2021/08/01/SpringBoot%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/"/>
+      <url>/2021/08/01/SpringBoot%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h2 id="想让一个普通类接受Spring管理，有以下方法："><a href="#想让一个普通类接受Spring管理，有以下方法：" class="headerlink" title="想让一个普通类接受Spring管理，有以下方法："></a>想让一个普通类接受Spring管理，有以下方法：</h2><ol><li> @Component @Service @Controller @Repository @Configuration 类</li><li> @Configuration类中的  @Bean方法</li><li> 在别的地方使用@Import(xxx类.class)  ， 将xxx类导入容器。</li></ol><hr><h2 id="Controller-层注解"><a href="#Controller-层注解" class="headerlink" title="Controller 层注解"></a>Controller 层注解</h2><h3 id="RequestMapping-GetMapping-PostMapping"><a href="#RequestMapping-GetMapping-PostMapping" class="headerlink" title="@RequestMapping   @GetMapping   @PostMapping"></a>@RequestMapping   @GetMapping   @PostMapping</h3><p>@GetMapping  等同于  @RequestMapping(method = RequestMethod.GET)，<strong>一般写在方法上方。</strong></p><p>@PostMapping  等同于  @RequestMapping(method = RequestMethod.POST)， <strong>一般写在方法上方。</strong></p><p>一般来说，@RequestMapping 可以用到<strong>类上方</strong>。 这样类中所有方法的路径都在类上方写的@RequestMapping的路径之后了。</p><h3 id="RequestParam"><a href="#RequestParam" class="headerlink" title="@RequestParam"></a>@RequestParam</h3><p><code>@RequestParam</code> 用于从<strong>请求URL</strong>中接收请求(==get和post方法都能用@RequestParam==)。支持下面几种参数: </p><ul><li>defaultValue(如果本次请求没有参数时候的默认值</li><li>required (规定这个参数是不是必须的)</li><li>value 是本次请求name的一个别名</li></ul><p>例如，GET请求是:  localhost:8080/testRequestParam?username=tom&amp;age=30. (POST的查询字符串在Body中，不在URL中)</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// value = xxxx 是为了从请求体/URL中找到所要的字段</span></span><br><span class="line"><span class="meta">@RequestMapping(value = &quot;/testRequestParam&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">testRequestParam</span><span class="params">(<span class="meta">@RequestParam(value=&quot;username&quot;)</span>String un ,<span class="meta">@RequestParam(value = &quot;age&quot;,required = false,defaultValue = &quot;0&quot;)</span> <span class="keyword">int</span> age)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;testRequestParam,username:&quot;</span>+un+<span class="string">&quot;,age,&quot;</span>+age);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><h3 id="PathVariable"><a href="#PathVariable" class="headerlink" title="@PathVariable"></a>@PathVariable</h3><ul><li>这个注解能够识别URL中的一个模板(只能从URL中读取参数). 例如这个URL:==<code>http://www.yourwebsite.net/employee/1</code>==</li><li>该注解和==@PathParam效果一样==。。</li></ul>]]></content>
       
       
       
         <tags>
             
-            <tag> SpringBoot </tag>
+            <tag> SpringBoot学习 </tag>
             
         </tags>
       
@@ -23,25 +23,17 @@
     
     
     <entry>
-      <title>hexo使用笔记</title>
-      <link href="/2021/06/24/hexo%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/"/>
-      <url>/2021/06/24/hexo%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</url>
+      <title>JNI踩坑</title>
+      <link href="/2021/08/01/JNI%E8%B8%A9%E5%9D%91/"/>
+      <url>/2021/08/01/JNI%E8%B8%A9%E5%9D%91/</url>
       
-        <content type="html"><![CDATA[<p>写文章： <code>hexo new &quot;文章名字&quot;</code>， 出现的markdown地址为blog/source/_posts</p>]]></content>
+        <content type="html"><![CDATA[<h3 id="JNI是什么"><a href="#JNI是什么" class="headerlink" title="JNI是什么"></a>JNI是什么</h3><p><strong>J</strong>ava <strong>N</strong>ative <strong>I</strong>nterface， 让Java调用本地（C/CPP）代码的能力。</p><p>具体来说，写一些java的native方法，然后写的JNI cpp文件的函数名要加上Java+包名（com.xiaopeng.…）+类名+native方法名。 这些cpp的方法名与java的native方法是对应的。</p><p>然后将CPP编译为动态链接库（win下是.dll，linux下是.so），用System.load() 引入。</p><p>难点在于Linux gcc编译。。</p>]]></content>
       
-      
-      <categories>
-          
-          <category> 教程 </category>
-          
-          <category> Hexo </category>
-          
-      </categories>
       
       
         <tags>
             
-            <tag> hexo </tag>
+            <tag> Java </tag>
             
         </tags>
       
